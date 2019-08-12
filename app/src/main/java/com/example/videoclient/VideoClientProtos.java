@@ -33,18 +33,27 @@ public final class VideoClientProtos {
         getUpdateIdBytes();
 
         /**
-         * <code>required string payload = 2;</code>
+         * <code>required string filename = 2;</code>
          */
-        boolean hasPayload();
+        boolean hasFilename();
         /**
-         * <code>required string payload = 2;</code>
+         * <code>required string filename = 2;</code>
          */
-        java.lang.String getPayload();
+        java.lang.String getFilename();
         /**
-         * <code>required string payload = 2;</code>
+         * <code>required string filename = 2;</code>
          */
         com.google.protobuf.ByteString
-        getPayloadBytes();
+        getFilenameBytes();
+
+        /**
+         * <code>required bytes video = 3;</code>
+         */
+        boolean hasVideo();
+        /**
+         * <code>required bytes video = 3;</code>
+         */
+        com.google.protobuf.ByteString getVideo();
     }
     /**
      * Protobuf type {@code videoclient.Update}
@@ -59,7 +68,8 @@ public final class VideoClientProtos {
         }
         private Update() {
             updateId_ = "";
-            payload_ = "";
+            filename_ = "";
+            video_ = com.google.protobuf.ByteString.EMPTY;
         }
 
         @java.lang.Override
@@ -99,7 +109,12 @@ public final class VideoClientProtos {
                         case 18: {
                             com.google.protobuf.ByteString bs = input.readBytes();
                             bitField0_ |= 0x00000002;
-                            payload_ = bs;
+                            filename_ = bs;
+                            break;
+                        }
+                        case 26: {
+                            bitField0_ |= 0x00000004;
+                            video_ = input.readBytes();
                             break;
                         }
                     }
@@ -169,19 +184,19 @@ public final class VideoClientProtos {
             }
         }
 
-        public static final int PAYLOAD_FIELD_NUMBER = 2;
-        private volatile java.lang.Object payload_;
+        public static final int FILENAME_FIELD_NUMBER = 2;
+        private volatile java.lang.Object filename_;
         /**
-         * <code>required string payload = 2;</code>
+         * <code>required string filename = 2;</code>
          */
-        public boolean hasPayload() {
+        public boolean hasFilename() {
             return ((bitField0_ & 0x00000002) == 0x00000002);
         }
         /**
-         * <code>required string payload = 2;</code>
+         * <code>required string filename = 2;</code>
          */
-        public java.lang.String getPayload() {
-            java.lang.Object ref = payload_;
+        public java.lang.String getFilename() {
+            java.lang.Object ref = filename_;
             if (ref instanceof java.lang.String) {
                 return (java.lang.String) ref;
             } else {
@@ -189,26 +204,41 @@ public final class VideoClientProtos {
                         (com.google.protobuf.ByteString) ref;
                 java.lang.String s = bs.toStringUtf8();
                 if (bs.isValidUtf8()) {
-                    payload_ = s;
+                    filename_ = s;
                 }
                 return s;
             }
         }
         /**
-         * <code>required string payload = 2;</code>
+         * <code>required string filename = 2;</code>
          */
         public com.google.protobuf.ByteString
-        getPayloadBytes() {
-            java.lang.Object ref = payload_;
+        getFilenameBytes() {
+            java.lang.Object ref = filename_;
             if (ref instanceof java.lang.String) {
                 com.google.protobuf.ByteString b =
                         com.google.protobuf.ByteString.copyFromUtf8(
                                 (java.lang.String) ref);
-                payload_ = b;
+                filename_ = b;
                 return b;
             } else {
                 return (com.google.protobuf.ByteString) ref;
             }
+        }
+
+        public static final int VIDEO_FIELD_NUMBER = 3;
+        private com.google.protobuf.ByteString video_;
+        /**
+         * <code>required bytes video = 3;</code>
+         */
+        public boolean hasVideo() {
+            return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>required bytes video = 3;</code>
+         */
+        public com.google.protobuf.ByteString getVideo() {
+            return video_;
         }
 
         private byte memoizedIsInitialized = -1;
@@ -221,7 +251,11 @@ public final class VideoClientProtos {
                 memoizedIsInitialized = 0;
                 return false;
             }
-            if (!hasPayload()) {
+            if (!hasFilename()) {
+                memoizedIsInitialized = 0;
+                return false;
+            }
+            if (!hasVideo()) {
                 memoizedIsInitialized = 0;
                 return false;
             }
@@ -235,7 +269,10 @@ public final class VideoClientProtos {
                 com.google.protobuf.GeneratedMessageV3.writeString(output, 1, updateId_);
             }
             if (((bitField0_ & 0x00000002) == 0x00000002)) {
-                com.google.protobuf.GeneratedMessageV3.writeString(output, 2, payload_);
+                com.google.protobuf.GeneratedMessageV3.writeString(output, 2, filename_);
+            }
+            if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                output.writeBytes(3, video_);
             }
             unknownFields.writeTo(output);
         }
@@ -249,7 +286,11 @@ public final class VideoClientProtos {
                 size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, updateId_);
             }
             if (((bitField0_ & 0x00000002) == 0x00000002)) {
-                size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, payload_);
+                size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, filename_);
+            }
+            if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                size += com.google.protobuf.CodedOutputStream
+                        .computeBytesSize(3, video_);
             }
             size += unknownFields.getSerializedSize();
             memoizedSize = size;
@@ -273,10 +314,15 @@ public final class VideoClientProtos {
                 result = result && getUpdateId()
                         .equals(other.getUpdateId());
             }
-            result = result && (hasPayload() == other.hasPayload());
-            if (hasPayload()) {
-                result = result && getPayload()
-                        .equals(other.getPayload());
+            result = result && (hasFilename() == other.hasFilename());
+            if (hasFilename()) {
+                result = result && getFilename()
+                        .equals(other.getFilename());
+            }
+            result = result && (hasVideo() == other.hasVideo());
+            if (hasVideo()) {
+                result = result && getVideo()
+                        .equals(other.getVideo());
             }
             result = result && unknownFields.equals(other.unknownFields);
             return result;
@@ -293,9 +339,13 @@ public final class VideoClientProtos {
                 hash = (37 * hash) + UPDATE_ID_FIELD_NUMBER;
                 hash = (53 * hash) + getUpdateId().hashCode();
             }
-            if (hasPayload()) {
-                hash = (37 * hash) + PAYLOAD_FIELD_NUMBER;
-                hash = (53 * hash) + getPayload().hashCode();
+            if (hasFilename()) {
+                hash = (37 * hash) + FILENAME_FIELD_NUMBER;
+                hash = (53 * hash) + getFilename().hashCode();
+            }
+            if (hasVideo()) {
+                hash = (37 * hash) + VIDEO_FIELD_NUMBER;
+                hash = (53 * hash) + getVideo().hashCode();
             }
             hash = (29 * hash) + unknownFields.hashCode();
             memoizedHashCode = hash;
@@ -417,8 +467,10 @@ public final class VideoClientProtos {
                 super.clear();
                 updateId_ = "";
                 bitField0_ = (bitField0_ & ~0x00000001);
-                payload_ = "";
+                filename_ = "";
                 bitField0_ = (bitField0_ & ~0x00000002);
+                video_ = com.google.protobuf.ByteString.EMPTY;
+                bitField0_ = (bitField0_ & ~0x00000004);
                 return this;
             }
 
@@ -450,7 +502,11 @@ public final class VideoClientProtos {
                 if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
                     to_bitField0_ |= 0x00000002;
                 }
-                result.payload_ = payload_;
+                result.filename_ = filename_;
+                if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+                    to_bitField0_ |= 0x00000004;
+                }
+                result.video_ = video_;
                 result.bitField0_ = to_bitField0_;
                 onBuilt();
                 return result;
@@ -498,10 +554,13 @@ public final class VideoClientProtos {
                     updateId_ = other.updateId_;
                     onChanged();
                 }
-                if (other.hasPayload()) {
+                if (other.hasFilename()) {
                     bitField0_ |= 0x00000002;
-                    payload_ = other.payload_;
+                    filename_ = other.filename_;
                     onChanged();
+                }
+                if (other.hasVideo()) {
+                    setVideo(other.getVideo());
                 }
                 this.mergeUnknownFields(other.unknownFields);
                 onChanged();
@@ -512,7 +571,10 @@ public final class VideoClientProtos {
                 if (!hasUpdateId()) {
                     return false;
                 }
-                if (!hasPayload()) {
+                if (!hasFilename()) {
+                    return false;
+                }
+                if (!hasVideo()) {
                     return false;
                 }
                 return true;
@@ -613,24 +675,24 @@ public final class VideoClientProtos {
                 return this;
             }
 
-            private java.lang.Object payload_ = "";
+            private java.lang.Object filename_ = "";
             /**
-             * <code>required string payload = 2;</code>
+             * <code>required string filename = 2;</code>
              */
-            public boolean hasPayload() {
+            public boolean hasFilename() {
                 return ((bitField0_ & 0x00000002) == 0x00000002);
             }
             /**
-             * <code>required string payload = 2;</code>
+             * <code>required string filename = 2;</code>
              */
-            public java.lang.String getPayload() {
-                java.lang.Object ref = payload_;
+            public java.lang.String getFilename() {
+                java.lang.Object ref = filename_;
                 if (!(ref instanceof java.lang.String)) {
                     com.google.protobuf.ByteString bs =
                             (com.google.protobuf.ByteString) ref;
                     java.lang.String s = bs.toStringUtf8();
                     if (bs.isValidUtf8()) {
-                        payload_ = s;
+                        filename_ = s;
                     }
                     return s;
                 } else {
@@ -638,53 +700,88 @@ public final class VideoClientProtos {
                 }
             }
             /**
-             * <code>required string payload = 2;</code>
+             * <code>required string filename = 2;</code>
              */
             public com.google.protobuf.ByteString
-            getPayloadBytes() {
-                java.lang.Object ref = payload_;
+            getFilenameBytes() {
+                java.lang.Object ref = filename_;
                 if (ref instanceof String) {
                     com.google.protobuf.ByteString b =
                             com.google.protobuf.ByteString.copyFromUtf8(
                                     (java.lang.String) ref);
-                    payload_ = b;
+                    filename_ = b;
                     return b;
                 } else {
                     return (com.google.protobuf.ByteString) ref;
                 }
             }
             /**
-             * <code>required string payload = 2;</code>
+             * <code>required string filename = 2;</code>
              */
-            public Builder setPayload(
+            public Builder setFilename(
                     java.lang.String value) {
                 if (value == null) {
                     throw new NullPointerException();
                 }
                 bitField0_ |= 0x00000002;
-                payload_ = value;
+                filename_ = value;
                 onChanged();
                 return this;
             }
             /**
-             * <code>required string payload = 2;</code>
+             * <code>required string filename = 2;</code>
              */
-            public Builder clearPayload() {
+            public Builder clearFilename() {
                 bitField0_ = (bitField0_ & ~0x00000002);
-                payload_ = getDefaultInstance().getPayload();
+                filename_ = getDefaultInstance().getFilename();
                 onChanged();
                 return this;
             }
             /**
-             * <code>required string payload = 2;</code>
+             * <code>required string filename = 2;</code>
              */
-            public Builder setPayloadBytes(
+            public Builder setFilenameBytes(
                     com.google.protobuf.ByteString value) {
                 if (value == null) {
                     throw new NullPointerException();
                 }
                 bitField0_ |= 0x00000002;
-                payload_ = value;
+                filename_ = value;
+                onChanged();
+                return this;
+            }
+
+            private com.google.protobuf.ByteString video_ = com.google.protobuf.ByteString.EMPTY;
+            /**
+             * <code>required bytes video = 3;</code>
+             */
+            public boolean hasVideo() {
+                return ((bitField0_ & 0x00000004) == 0x00000004);
+            }
+            /**
+             * <code>required bytes video = 3;</code>
+             */
+            public com.google.protobuf.ByteString getVideo() {
+                return video_;
+            }
+            /**
+             * <code>required bytes video = 3;</code>
+             */
+            public Builder setVideo(com.google.protobuf.ByteString value) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                bitField0_ |= 0x00000004;
+                video_ = value;
+                onChanged();
+                return this;
+            }
+            /**
+             * <code>required bytes video = 3;</code>
+             */
+            public Builder clearVideo() {
+                bitField0_ = (bitField0_ & ~0x00000004);
+                video_ = getDefaultInstance().getVideo();
                 onChanged();
                 return this;
             }
@@ -751,10 +848,10 @@ public final class VideoClientProtos {
             descriptor;
     static {
         java.lang.String[] descriptorData = {
-                "\n\021videoclient.proto\022\013videoclient\",\n\006Upda" +
-                        "te\022\021\n\tupdate_id\030\001 \002(\t\022\017\n\007payload\030\002 \002(\tB," +
-                        "\n\027com.example.videoclientB\021VideoClientPr" +
-                        "otos"
+                "\n\021videoclient.proto\022\013videoclient\"<\n\006Upda" +
+                        "te\022\021\n\tupdate_id\030\001 \002(\t\022\020\n\010filename\030\002 \002(\t\022" +
+                        "\r\n\005video\030\003 \002(\014B,\n\027com.example.videoclien" +
+                        "tB\021VideoClientProtos"
         };
         com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
                 new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -773,7 +870,7 @@ public final class VideoClientProtos {
         internal_static_videoclient_Update_fieldAccessorTable = new
                 com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
                 internal_static_videoclient_Update_descriptor,
-                new java.lang.String[] { "UpdateId", "Payload", });
+                new java.lang.String[] { "UpdateId", "Filename", "Video", });
     }
 
     // @@protoc_insertion_point(outer_class_scope)
